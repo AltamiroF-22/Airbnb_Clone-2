@@ -3,7 +3,7 @@
 import axios from "axios";
 import { AiFillGithub } from "react-icons/ai";
 import { FcGoogle } from "react-icons/fc";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { signIn } from "next-auth/react";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 
@@ -13,9 +13,11 @@ import Heading from "../Heading";
 import Input from "../Inputs/Input";
 import toast from "react-hot-toast";
 import Button from "../Button";
+import UserLoginModal from "@/app/hooks/UserLoginModal";
 
 const RegisterModal = () => {
   const registerModal = UserRegisterModal();
+  const loginModal = UserLoginModal();
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const {
@@ -45,6 +47,11 @@ const RegisterModal = () => {
         setIsLoading(false);
       });
   };
+
+  const toggle = useCallback(() => {
+    registerModal.onClose();
+    loginModal.onOPen();
+  }, [loginModal, registerModal]);
 
   const bodyContent = (
     <div className="flex flex-col gap-3">
@@ -94,12 +101,12 @@ const RegisterModal = () => {
         icon={AiFillGithub}
         onClick={() => signIn("github")}
       /> */}
-      
+
       <div className="text-neutral-500 text-center mt-4 font-light">
         <div className=" flex flex-row justify-center gap-2">
           <div className="">Already have an Account?</div>
           <div
-            onClick={registerModal.onClose}
+            onClick={toggle}
             className=" text-neutral-800 cursor-pointer hover:underline"
           >
             Log in
