@@ -3,8 +3,9 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Navbar from "./components/Navbar/Navbar";
 import RegisterModal from "./components/Modals/RegisterModal";
-import ToastProvider from "./providers/ToastPropvider";
 import LoginModal from "./components/Modals/LoginModal";
+import RentModal from "./components/Modals/RentModals";
+import ToastProvider from "./providers/ToastPropvider";
 import getCurrentUser from "./actions/getCurrentUser";
 
 export const metadata: Metadata = {
@@ -27,6 +28,7 @@ export default async function RootLayout({
     <html lang="en">
       <body className={font.className}>
         <ToastProvider />
+        <RentModal />
         <RegisterModal />
         <LoginModal />
         <Navbar currentUser={currentUser} />
