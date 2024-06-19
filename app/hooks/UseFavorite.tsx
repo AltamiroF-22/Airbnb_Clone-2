@@ -2,9 +2,7 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useCallback, useMemo } from "react";
 import { toast } from "react-hot-toast";
-
 import { SafeUser } from "../types";
-
 import UserLoginModal from "./UserLoginModal";
 
 interface IUseFavorite {
@@ -46,6 +44,11 @@ const UseFavorite = ({ listingId, currentUser }: IUseFavorite) => {
     },
     [currentUser, loginModal, hasFavorited, listingId, router]
   );
+
+  return {
+    hasFavorited,
+    toggleFavorite,
+  };
 };
 
 export default UseFavorite;

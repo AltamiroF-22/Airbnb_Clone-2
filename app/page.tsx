@@ -1,4 +1,3 @@
-import Image from "next/image";
 import getListings from "./actions/getListings";
 import Container from "./components/Container";
 import EmptyState from "./components/EmptyState";
@@ -8,6 +7,7 @@ import getCurrentUser from "./actions/getCurrentUser";
 export default async function Home() {
   const listings = await getListings();
   const currentUser = await getCurrentUser();
+  console.log(currentUser)
 
   if (listings.length === 0) {
     return (

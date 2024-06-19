@@ -1,5 +1,4 @@
 import { NextResponse } from "next/server";
-
 import getCurrentUser from "@/app/actions/getCurrentUser";
 import prisma from "@/app/libs/prismadb";
 
@@ -8,29 +7,37 @@ interface IDParams {
 }
 
 export async function POST(req: Request, { params }: { params: IDParams }) {
-  const currentUser = await getCurrentUser();
+  try {
+    const currentUser = await getCurrentUser();
 
-  if (!currentUser) return NextResponse.error();
+    if (!currentUser) {
+      return NextResponse.error();
+    }
 
-  const { listingId } = params;
+    const { listingId } = params;
 
-  if (!listingId || typeof listingId !== "string")
-    throw new Error("Invalid ID");
+    if (!listingId || typeof listingId !== "string") {
+      throw new Error("Invalid ID");
+    }
 
-  let favoriteIds = [...(currentUser.favoriteIds || [])];
+    let favoriteIds = [...(currentUser.favoriteIds || [])];
 
-  favoriteIds.push(listingId);
+    favoriteIds.push(listingId);
 
-  const user = await prisma.user.update({
-    where: {
-      id: currentUser.id,
-    },
-    data: {
-      favoriteIds: favoriteIds,
-    },
-  });
+    const updatedUser = await prisma.user.update({
+      where: {
+        id: currentUser.id,
+      },
+      data: {
+        favoriteIds,
+      },
+    });
 
-  return NextResponse.json(user);
+    return NextResponse.json(updatedUser);
+  } catch (error) {
+    console.error("Error processing POST request:", error);
+    return NextResponse.error();
+  }
 }
 
 export async function DELETE(req: Request, { params }: { params: IDParams }) {
