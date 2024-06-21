@@ -3,7 +3,7 @@ import getCurrentUser from "@/app/actions/getCurrentUser";
 import prisma from "@/app/libs/prismadb";
 
 interface IDParams {
-  listingId?: string;
+  listingId: string ;
 }
 
 export async function POST(req: Request, { params }: { params: IDParams }) {
