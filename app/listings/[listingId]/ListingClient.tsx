@@ -12,6 +12,7 @@ import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { Range } from "react-date-range";
 import ListingReservation from "@/app/components/listings/ListingReservation";
 
 const initialDateRange = {
@@ -36,7 +37,7 @@ const ListingClient: React.FC<ListingClientProps> = ({
   const loginModal = UserLoginModal();
   const router = useRouter();
 
-  const disableDates = useMemo(() => {
+  const disabledDates = useMemo(() => {
     let dates: Date[] = [];
 
     reservations.forEach((reservation) => {
@@ -53,7 +54,7 @@ const ListingClient: React.FC<ListingClientProps> = ({
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [totalPrice, setTotalPrice] = useState<number>(listing.price);
-  const [dateRange, setDateRange] = useState(initialDateRange);
+  const [dateRange, setDateRange] = useState<Range>(initialDateRange);
 
   const onCreate = useCallback(() => {
     if (!currentUser) return loginModal.onClose();
@@ -90,7 +91,7 @@ const ListingClient: React.FC<ListingClientProps> = ({
       );
 
       if (dayCount && listing.price) {
-        setTotalPrice(dayCount * listing.price);
+        setTotalPrice(dayCount * listing.price *-1 + listing.price);
       } else {
         setTotalPrice(listing.price);
       }
@@ -130,7 +131,7 @@ const ListingClient: React.FC<ListingClientProps> = ({
                 dateRange={dateRange}
                 onSubmit={onCreate}
                 disable={isLoading}
-                disabledDates={disableDates}
+                disabledDates={disabledDates}
               />
             </div>
           </div>
