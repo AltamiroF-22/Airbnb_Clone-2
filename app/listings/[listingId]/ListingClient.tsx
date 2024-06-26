@@ -66,6 +66,7 @@ const ListingClient: React.FC<ListingClientProps> = ({
         totalPrice,
         startDate: dateRange.startDate,
         endDate: dateRange.endDate,
+        listingId: listing?.id,
       })
       .then(() => {
         toast.success("Listing reserved!");
@@ -91,7 +92,7 @@ const ListingClient: React.FC<ListingClientProps> = ({
       );
 
       if (dayCount && listing.price) {
-        setTotalPrice(dayCount * listing.price *-1 + listing.price);
+        setTotalPrice(dayCount * listing.price * -1 + listing.price);
       } else {
         setTotalPrice(listing.price);
       }
