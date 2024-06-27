@@ -14,8 +14,9 @@ export default async function getListings() {
     }));
 
     return safeListings;
-    
+
   } catch (err: any) {
-    throw new Error(err);
+    console.error("Error fetching listings:", err);
+    throw new Error("Failed to fetch listings. Please try again later.");
   }
 }
