@@ -75,7 +75,10 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
                 />
               </div>
               <div className="flex flex-col cursor-pointer">
-                <MenuItem onClick={() => {}} label="My favorites" />
+                <MenuItem
+                  onClick={() => router.push("/favorites")}
+                  label="My favorites"
+                />
               </div>
               <div className="flex flex-col cursor-pointer">
                 <MenuItem
