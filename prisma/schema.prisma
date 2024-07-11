@@ -64,7 +64,7 @@ model Reservations {
   userId     String   @db.ObjectId
   listingId  String   @db.ObjectId
   startDate  DateTime
-  endDate     DateTime
+  enDate     DateTime
   totalPrice Int
   createdAt  DateTime @default(now())
   user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
