@@ -40,7 +40,7 @@ export default async function getReservation(params: IParams) {
       ...reservation,
       createdAt: reservation.createdAt.toISOString(),
       startDate: reservation.startDate.toISOString(),
-      enDate: reservation.enDate.toISOString(),
+      endDate: reservation.enDate.toISOString(),
       listing: {
         ...reservation.listing,
         createdAt: reservation.createdAt.toISOString(),
