@@ -3,14 +3,14 @@
 import { useRouter } from "next/navigation";
 import Container from "../components/Container";
 import Heading from "../components/Heading";
-import { SafeReservtions, SafeUser } from "../types";
+import { SafeReservtions2, SafeUser } from "../types";
 import { useCallback, useState } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
 import ListingCard from "../components/listings/ListingCard";
 
 interface TripsClientProps {
-  reservation: SafeReservtions[];
+  reservation: SafeReservtions2[];
   currentUser?: SafeUser | null;
 }
 
