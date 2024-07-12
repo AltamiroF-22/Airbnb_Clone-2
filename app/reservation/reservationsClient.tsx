@@ -1,6 +1,6 @@
 "use client";
 
-import { SafeReservtions, SafeUser } from "../types";
+import { SafeReservtions2, SafeUser } from "../types";
 
 import { toast } from "react-hot-toast";
 import { useRouter } from "next/navigation";
@@ -12,7 +12,7 @@ import { useCallback, useState } from "react";
 import axios from "axios";
 
 interface ReservationsClientProps {
-  reservations: SafeReservtions[];
+  reservations: SafeReservtions2[];
   currentUser: SafeUser;
 }
 
